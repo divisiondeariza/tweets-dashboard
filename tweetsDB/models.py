@@ -15,9 +15,13 @@ class Tweet(models.Model):
 	likes = models.IntegerField(null=True)
 	retweets = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
+	exists_in_twitter = models.BooleanField(default=True)
 
 	def url(self):
 		return '<a target="_blank" href="https://twitter.com/statuses/%s">link to tweet</a>' % (self.tweet_id)
 
 	url.short_description = 'Url'
 	url.allow_tags = True
+
+	def is_response(self):
+		return not in_reply_to_status_id == "";

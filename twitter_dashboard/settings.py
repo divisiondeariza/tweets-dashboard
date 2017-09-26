@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tweetsDB',
-    'read_only_admin'
+    'read_only_admin',
+    'rangefilter',
+    'advanced_filters'
 ]
 
 MIDDLEWARE = [
