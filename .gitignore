@@ -1,4 +1,4 @@
-# Created by https://www.gitignore.io
+ Created by https://www.gitignore.io
 
 ### OSX ###
 .DS_Store
@@ -87,4 +87,5 @@ local_settings.py
 
 .env
 db.sqlite3
-
+*.py
+tweetsDB/management/commands/secrets.py
