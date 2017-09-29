@@ -15,10 +15,11 @@ then install dependences. **In order to avoid collitions with your local package
 pip install -r requirements.txt
 ```
 
-Then create and update the database
+Then create and update the database, and create a superuser
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+python manage.py createsuperuser
 ```
 
 then start the server:
@@ -26,4 +27,4 @@ then start the server:
 ```bash
 python manage.py runserver
 ```
-Now you can use it in http://localhost:8000
+Now you can use it in http://localhost:8000/admin with the password and username you just created.
