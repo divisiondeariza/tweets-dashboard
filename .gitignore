@@ -88,5 +88,7 @@ local_settings.py
 .env
 db.sqlite3
 
-tweetsDB/secrets.py
+# tweetsDB/secrets.py
 tweetsDB/migrations
+.project
+.pydevproject

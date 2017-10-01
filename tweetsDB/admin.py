@@ -1,5 +1,6 @@
 from django.contrib import admin
-from tweetsDB import models, logger
+from tweetsDB import models
+from libs.logger import logger
 from read_only_admin.admin import ReadonlyAdmin
 from rangefilter.filter import DateRangeFilter
 from advanced_filters.admin import AdminAdvancedFiltersMixin

@@ -1,12 +1,16 @@
 certifi==2017.7.27.1
 chardet==3.0.4
+coverage==4.4.1
 Django==1.11.5
 django-admin-rangefilter==0.3.0
 django-advanced-filters==1.0.6
 django-braces==1.4.0
 django-read-only-admin==0.1.0
+funcsigs==1.0.2
 idna==2.6
+mock==2.0.0
 oauthlib==2.0.4
+pbr==3.1.1
 pytz==2017.2
 requests==2.18.4
 requests-oauthlib==0.8.0
