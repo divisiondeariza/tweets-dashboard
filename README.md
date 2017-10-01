@@ -1,4 +1,6 @@
 # tweets-dashboard
+[![Build Status](https://travis-ci.org/divisiondeariza/tweets-dashboard.svg?branch=master)](https://travis-ci.org/divisiondeariza/tweets-dashboard)
+
 Django-based Dashboard for analyzing, filtering and erasing tweets stored from api or from csv file.
 
 It stores the data in a mysqlite database, and you can manipulate them through a
