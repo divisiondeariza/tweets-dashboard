@@ -7,7 +7,7 @@ import unittest
 from tweetsDB import models
 from .. import tweets_scrapper 
 from unittest.case import skip
-from mock.mock import patch, Mock
+from mock.mock import patch, Mock, call
 from django.test.testcases import TestCase
 
 class Status_mock():
@@ -29,16 +29,27 @@ class TestTweetsScrapper(unittest.TestCase):
     def tearDown(self):
         pass
 
-    @skip("")
-    def testTweets(self):
-        pass
-    
+    @patch(__name__ + '.tweets_scrapper.ChunkSaver')
+    def testCallsChunkSaverCorrectly(self, mock_chunk_saver):
+        scrapper = tweets_scrapper.TweetsScrapper()
+        scrapper.populate_db()
+        expected_calls = [call(["dummyid{0}".format(i) for i in range(100) ]), 
+                          call(["dummyid{0}".format(i + 100) for i in range(100) ])]
+        mock_chunk_saver().save.assert_has_calls(expected_calls, any_order=False)
+ 
+
+    @patch(__name__ + '.tweets_scrapper.ChunkSaver')
+    def testChunkSacerIsCreatedOnce(self, mock_chunk_saver):
+        scrapper = tweets_scrapper.TweetsScrapper()
+        scrapper.populate_db()
+        scrapper.populate_db()
+        mock_chunk_saver.assert_called_once()
     
 class TestChunkSaver(TestCase):
 
 
     def setUp(self):
-        for i in range(2):
+        for i in range(4):
             tweet = models.Tweet.objects.create(tweet_id = "id{0}".format(i),
                                                 timestamp = "2017-09-25 13:41:10+0000")
             
@@ -64,6 +75,12 @@ class TestChunkSaver(TestCase):
         self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id0', retweets = 0, likes = 1).exists())
         self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id1', retweets = 2, likes = 3).exists())        
         
-        
+    @patch(__name__ + '.tweets_scrapper.logger')
+    def testCreatesOnlyOneAprPerInstance(self, mock_logger):
+        mock_logger.login = Mock(return_value = self.mock_API)
+        chunkSaver = tweets_scrapper.ChunkSaver()
+        chunkSaver.save(['id0','id1'])
+        chunkSaver.save(['id1','id2'])
+        mock_logger.login.assert_called_once()
         
         
