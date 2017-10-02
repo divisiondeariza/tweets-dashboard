@@ -4,13 +4,9 @@ Created on 1/10/2017
 @author: emmanuel
 '''
 import unittest
-import logger
-import secrets
+from .. import logger, secrets 
 import tweepy
 from mock.mock import patch, Mock
-
-print __name__
-
 
 class Test(unittest.TestCase):
 
@@ -44,10 +40,3 @@ class Test(unittest.TestCase):
         mock_tweepy.API = Mock(return_value = mock_api)      
         self.assertEqual(mock_api, logger.login())    
         
-        
-        
-
-
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()

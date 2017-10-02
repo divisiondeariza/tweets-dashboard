@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from tweetsDB import models
-from libs.logger import logger
+from libs.twitter_utils import logger
 from django.db import transaction
 
 
