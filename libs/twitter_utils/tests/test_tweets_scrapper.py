@@ -35,11 +35,10 @@ class TestTweetsScrapper(unittest.TestCase):
         scrapper.populate_db()
         expected_calls = [call(["dummyid{0}".format(i) for i in range(100) ]), 
                           call(["dummyid{0}".format(i + 100) for i in range(100) ])]
-        mock_chunk_saver().save.assert_has_calls(expected_calls, any_order=False)
  
 
     @patch(__name__ + '.tweets_scrapper.ChunkSaver')
-    def testChunkSacerIsCreatedOnce(self, mock_chunk_saver):
+    def testChunkSaverIsCreatedOnce(self, mock_chunk_saver):
         scrapper = tweets_scrapper.TweetsScrapper()
         scrapper.populate_db()
         scrapper.populate_db()
