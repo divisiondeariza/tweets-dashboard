@@ -1,6 +1,6 @@
 from django.contrib import admin
 from tweetsDB import models
-from libs.twitter_utils import logger
+from libs.twitter_utils import logger, tweets_destroyer
 from read_only_admin.admin import ReadonlyAdmin
 from rangefilter.filter import DateRangeFilter
 from advanced_filters.admin import AdminAdvancedFiltersMixin
@@ -37,21 +37,10 @@ class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 	actions = ['destroy_tweets']
 	search_fields = ['text']
 	list_per_page = 990
+	destroyer = tweets_destroyer.Destroyer()
 	
 	def destroy_tweets(self, request, queryset):
-		twapi =  logger.login()		
-		for q in queryset:
-			try:
-				print "erasing: " + q.text
-				twapi.destroy_status(q.tweet_id)
-			except TweepError  as e:
-				if 'message' in e.message[0]:
-					print "Unexpected error:", e.message[0]['message']
-				else:
-					print "Unexpected error:", e
-			finally:
-				q.exists_in_twitter = False
-				q.save()
+		self.destroyer.destroy(queryset)
 			
 
 	def has_add_permission(self, request):
