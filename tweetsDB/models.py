@@ -8,10 +8,14 @@ class Tweet(models.Model):
 	tweet_id = models.CharField(max_length = 255, unique =  True)
 	in_reply_to_status_id = models.CharField(max_length = 255)
 	in_reply_to_user_id = models.CharField(max_length = 255)
-	timestamp = models.DateTimeField()
+	timestamp = models.DateTimeField(null=True)
 	source = models.CharField(max_length = 255)
 	text = models.CharField(max_length = 255)
+	retweeted_status_id = models.CharField(max_length = 255)	
+	retweeted_status_user_id = models.CharField(max_length = 255)
+	retweeted_status_timestamp = models.DateTimeField(null=True)
 	expanded_urls = models.CharField(max_length = 255)
+	
 	likes = models.IntegerField(null=True)
 	retweets = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
@@ -24,4 +28,4 @@ class Tweet(models.Model):
 	url.allow_tags = True
 
 	def is_response(self):
-		return not in_reply_to_status_id == "";
+		return not self.in_reply_to_status_id == "";

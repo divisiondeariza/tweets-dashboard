@@ -11,6 +11,7 @@ class Destroyer(object):
     def __init__(self):
         self.API = logger.login()
 
+    
     def destroy(self, tweets_query):
         for tweet in tweets_query:
             self._destroy_tweet(tweet) 

@@ -1,5 +1,6 @@
 import logger
 from tweetsDB import models
+from django.db import transaction
 
 
 class TweetsScrapper(object):
@@ -17,7 +18,9 @@ class TweetsScrapper(object):
         tweets = models.Tweet.objects.all()
         tweets_ids = [tweet.tweet_id for tweet in tweets]
         return tweets_ids
-
+    
+    
+@transaction.atomic 
 class ChunkSaver(object):
     
     def __init__(self):
