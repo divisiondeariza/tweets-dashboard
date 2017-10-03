@@ -5,10 +5,12 @@ Created on 2/10/2017
 '''
 import csv
 from tweetsDB import models
+from django.db import transaction
 
 
 class Loader(object):
     
+    @transaction.atomic
     def load(self, filename):
         with open(filename,'rb') as csvfile:
             reader = csv.DictReader(csvfile)
