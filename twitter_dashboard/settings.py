@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tweetsDB',
     'read_only_admin',
     'rangefilter',
-    'advanced_filters'
+    'advanced_filters',
+    'taggit',
+    'tweetsDB'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 1001
+TAGGIT_CASE_INSENSITIVE = True
+

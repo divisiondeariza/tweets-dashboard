@@ -6,6 +6,7 @@ django-admin-rangefilter==0.3.0
 django-advanced-filters==1.0.6
 django-braces==1.4.0
 django-read-only-admin==0.1.0
+django-taggit==0.22.1
 funcsigs==1.0.2
 idna==2.6
 mock==2.0.0

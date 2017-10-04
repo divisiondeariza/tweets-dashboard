@@ -1,12 +1,10 @@
 from django.contrib import admin
 from tweetsDB import models
 from libs.twitter_utils import logger, tweets_destroyer
-from read_only_admin.admin import ReadonlyAdmin
 from rangefilter.filter import DateRangeFilter
 from advanced_filters.admin import AdminAdvancedFiltersMixin
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
-from tweepy import TweepError
 
 
 class IsResponseFilter(admin.SimpleListFilter):
@@ -32,7 +30,11 @@ class IsResponseFilter(admin.SimpleListFilter):
 @admin.register(models.Tweet)
 class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 	list_display  = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 'in_reply_to_user_id')
-	list_filter = (('timestamp', DateRangeFilter), 'exists_in_twitter', IsResponseFilter, 'likes', 'retweets')
+	readonly_fields = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 
+					   'in_reply_to_user_id', 'tweet_id', 'in_reply_to_status_id',
+ 					   'retweeted_status_id', 'retweeted_status_user_id', 'retweeted_status_timestamp',
+ 					   'source', 'expanded_urls', 'responses')
+	list_filter = (('timestamp', DateRangeFilter), 'exists_in_twitter', IsResponseFilter, 'tags')
 	advanced_filter_fields = ('timestamp', 'exists_in_twitter', 'likes', 'retweets', 'is_response')
 	actions = ['destroy_tweets']
 	search_fields = ['text']

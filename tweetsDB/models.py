@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -20,6 +21,7 @@ class Tweet(models.Model):
 	retweets = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
 	exists_in_twitter = models.BooleanField(default=True)
+	tags = TaggableManager()
 
 	def url(self):
 		return '<a target="_blank" href="https://twitter.com/statuses/%s">link to tweet</a>' % (self.tweet_id)
