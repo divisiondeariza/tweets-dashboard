@@ -6,6 +6,8 @@ Created on 4/10/2017
 import unittest
 from django.test.testcases import TestCase
 from tweetsDB import models
+from django.core.exceptions import ValidationError
+from unittest.case import skip
 
 
 class TestTweets(TestCase):
@@ -33,8 +35,42 @@ class TestTweets(TestCase):
                                             in_reply_to_status_id = "anothertweetid")
         self.assertTrue(tweet.is_response())        
         
+        
+class TestRating(TestCase):
+
+    def setUp(self):
+        self.tweet = models.Tweet.objects.create(tweet_id = "tweetid")
 
 
+    def tearDown(self):
+        pass
+
+    def testScoreCannotBeGreaterThan10(self):
+        with self.assertRaises(ValidationError):
+            rating = models.Rating.objects.create(tweet = self.tweet,
+                                         score = 11)
+            rating.full_clean()
+        
+    def testScoreCannotBeLessThanZero(self):
+        with self.assertRaises(ValidationError):
+            rating = models.Rating.objects.create(tweet = self.tweet,
+                                         score = -1)
+            rating.full_clean()
+            
+    def testWeightIsOneByDefault(self):
+        rating = models.Rating.objects.create(tweet = self.tweet, score = 2)
+        self.assertEqual(rating.weight, 1)
+    
+    def testWeightcanotBeGreaterThanOne(self):
+        with self.assertRaises(ValidationError):
+            rating = models.Rating.objects.create(tweet = self.tweet, score = 2, weight = 1.1)
+            rating.full_clean()
+
+    def testWeightcanotBeLessThanZero(self):
+        with self.assertRaises(ValidationError):
+            rating = models.Rating.objects.create(tweet = self.tweet, score = 2, weight = -0.1)
+            rating.full_clean()            
+            
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
