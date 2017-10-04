@@ -8,18 +8,22 @@ class TweetsScrapper(object):
     def __init__(self):
         self.chunk_saver = ChunkSaver()
 
-
     def populate_db(self, only_not_scrapped = False):
-        if only_not_scrapped:
-            query = models.Tweet.objects.filter(exists_in_twitter = True,
-                                                likes = None)
-        else:
-            query = models.Tweet.objects.all()
+        query = self._get_query(only_not_scrapped)
         tweets_ids = self._get_tweets_ids(query)
         for i in range(0, len(tweets_ids), 100):
             self.chunk_saver.save(tweets_ids[i:i + 100]) 
 
 
+    def _get_query(self, only_not_scrapped):
+        if only_not_scrapped:
+            query = models.Tweet.objects.filter(exists_in_twitter=True, likes=None)
+        else:
+            query = models.Tweet.objects.all()
+            
+        print query.count()
+        return query
+    
     def _get_tweets_ids(self, query):
         tweets_ids = [tweet.tweet_id for tweet in query]
         return tweets_ids
