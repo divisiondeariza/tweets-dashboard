@@ -19,7 +19,8 @@ class Destroyer(object):
     def _destroy_tweet(self, tweet):
         try: 
             self.API.destroy_status(tweet.tweet_id)
-        except TweepError:    
+        except TweepError as e:    
+            #print e
             pass
         finally:     
             tweet.exists_in_twitter = False
