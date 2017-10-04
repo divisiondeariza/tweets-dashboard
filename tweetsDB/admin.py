@@ -25,10 +25,15 @@ class IsResponseFilter(admin.SimpleListFilter):
 		if self.value() == 'false':
 			return queryset.filter(Q(in_reply_to_user_id = "") & Q(in_reply_to_status_id = ""))
 	
-	
+
+class inlineRatingAdmin(admin.TabularInline):
+	model = models.Rating
+	extra = 0
+
 
 @admin.register(models.Tweet)
 class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
+	inlines = [inlineRatingAdmin]
 	list_display  = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 'in_reply_to_user_id')
 	readonly_fields = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 
 					   'in_reply_to_user_id', 'tweet_id', 'in_reply_to_status_id',

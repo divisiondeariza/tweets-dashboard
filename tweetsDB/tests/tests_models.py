@@ -34,12 +34,28 @@ class TestTweets(TestCase):
         tweet = models.Tweet.objects.create(tweet_id = "tweetid",
                                             in_reply_to_status_id = "anothertweetid")
         self.assertTrue(tweet.is_response())        
-        
+   
+class TestRatingGroup(TestCase):
+    
+    def testWeightIsOneByDefault(self):
+        group = models.RatingGroup.objects.create(name = "a group")
+        self.assertEqual(group.weight, 1)
+     
+    def testWeightcanotBeGreaterThanOne(self):
+        with self.assertRaises(ValidationError):
+            group = models.RatingGroup.objects.create(name = "a group", weight = 1.1)
+            group.full_clean()
+ 
+    def testWeightcanotBeLessThanZero(self):
+        with self.assertRaises(ValidationError):
+            group = models.RatingGroup.objects.create(name = "a group", weight = -0.1)
+            group.full_clean()   
         
 class TestRating(TestCase):
 
     def setUp(self):
         self.tweet = models.Tweet.objects.create(tweet_id = "tweetid")
+        self.group = models.RatingGroup.objects.create(name = "a group")
 
 
     def tearDown(self):
@@ -48,28 +64,16 @@ class TestRating(TestCase):
     def testScoreCannotBeGreaterThan10(self):
         with self.assertRaises(ValidationError):
             rating = models.Rating.objects.create(tweet = self.tweet,
-                                         score = 11)
+                                                  group = self.group,
+                                                  score = 11)
             rating.full_clean()
         
     def testScoreCannotBeLessThanZero(self):
         with self.assertRaises(ValidationError):
             rating = models.Rating.objects.create(tweet = self.tweet,
-                                         score = -1)
-            rating.full_clean()
-            
-    def testWeightIsOneByDefault(self):
-        rating = models.Rating.objects.create(tweet = self.tweet, score = 2)
-        self.assertEqual(rating.weight, 1)
-    
-    def testWeightcanotBeGreaterThanOne(self):
-        with self.assertRaises(ValidationError):
-            rating = models.Rating.objects.create(tweet = self.tweet, score = 2, weight = 1.1)
-            rating.full_clean()
-
-    def testWeightcanotBeLessThanZero(self):
-        with self.assertRaises(ValidationError):
-            rating = models.Rating.objects.create(tweet = self.tweet, score = 2, weight = -0.1)
-            rating.full_clean()            
+                                                  group = self.group,
+                                                  score = -1)
+            rating.full_clean()          
             
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

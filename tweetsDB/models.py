@@ -33,12 +33,20 @@ class Tweet(models.Model):
 	def is_response(self):
 		return not self.in_reply_to_status_id == "";
 
-
-class Rating(models.Model):
-	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
-	score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
+class RatingGroup(models.Model):
 	weight = models.FloatField(default = 1,
 								validators=[MaxValueValidator(1), MinValueValidator(0)])
 	name = models.CharField(max_length = 255)
+
+
+class Rating(models.Model):
+	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
+	group = models.ForeignKey('RatingGroup', on_delete=models.CASCADE)
+	score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
 	
+
+	
+
+
+
 	
