@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from taggit.managers import TaggableManager
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -26,8 +27,15 @@ class Tweet(models.Model):
 	def url(self):
 		return '<a target="_blank" href="https://twitter.com/statuses/%s">link to tweet</a>' % (self.tweet_id)
 
-	url.short_description = 'Url'
+	url.short_description = 'Url tag'
 	url.allow_tags = True
 
 	def is_response(self):
 		return not self.in_reply_to_status_id == "";
+
+
+# class Rating(models.Model):
+# 	score = models.IntegerField(
+# 		validators=[MaxValueValidator(10), MinValueValidator(0)])
+	
+	
