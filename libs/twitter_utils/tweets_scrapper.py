@@ -20,8 +20,6 @@ class TweetsScrapper(object):
             query = models.Tweet.objects.filter(exists_in_twitter=True, likes=None)
         else:
             query = models.Tweet.objects.all()
-            
-        print query.count()
         return query
     
     def _get_tweets_ids(self, query):

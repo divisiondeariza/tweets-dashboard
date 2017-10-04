@@ -54,8 +54,18 @@ class Test(TestCase):
     @patch(__name__ + '.tweets_destroyer.logger')
     def testSetsExistsInTwitterFalseEvenIfTweetsDoesNotExists(self, mock_logger):
         mock_logger.login = Mock(return_value = self.mock_API)
-        self.mock_API.destroy_status.side_effect = TweepError("status does not exists")
+        self.mock_API.destroy_status.side_effect = TweepError('No status found with that ID.', api_code = 144)
         destroyer = tweets_destroyer.Destroyer()
         query = models.Tweet.objects.filter(tweet_id = "id1")
         destroyer.destroy(query)
         self.assertFalse(models.Tweet.objects.get(tweet_id = "id1").exists_in_twitter)
+        
+    @patch(__name__ + '.tweets_destroyer.logger')
+    def testPassByExceptionWhenNotDueToStatusNotFound(self, mock_logger):
+        mock_logger.login = Mock(return_value = self.mock_API)
+        self.mock_API.destroy_status.side_effect = TweepError('Some error', api_code = 145)
+        destroyer = tweets_destroyer.Destroyer()
+        query = models.Tweet.objects.filter(tweet_id = "id1")
+        with self.assertRaises(TweepError):
+            destroyer.destroy(query)
+        self.assertTrue(models.Tweet.objects.get(tweet_id = "id1").exists_in_twitter)
