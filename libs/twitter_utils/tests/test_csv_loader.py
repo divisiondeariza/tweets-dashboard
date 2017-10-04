@@ -9,9 +9,10 @@ from mock import mock
 from .. import csv_loader
 from unittest.case import skip
 from tweetsDB import models
+from django.test.testcases import TestCase
 
 
-class Test(unittest.TestCase):
+class Test(TestCase):
 
 
     def setUp(self):
