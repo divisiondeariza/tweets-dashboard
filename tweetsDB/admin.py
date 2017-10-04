@@ -1,6 +1,6 @@
 from django.contrib import admin
 from tweetsDB import models
-from libs.twitter_utils import logger, tweets_destroyer
+from libs.twitter_utils import tweets_destroyer
 from rangefilter.filter import DateRangeFilter
 from advanced_filters.admin import AdminAdvancedFiltersMixin
 from django.db.models import Q
@@ -27,7 +27,7 @@ class IsResponseFilter(admin.SimpleListFilter):
 	
 
 class inlineRatingAdmin(admin.TabularInline):
-	model = models.Rating
+	model = models.RatingScore
 	extra = 0
 
 
@@ -61,3 +61,6 @@ class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 		if 'delete_selected' in actions:
 			del actions['delete_selected']
 		return actions
+
+
+admin.site.register(models.Rating)

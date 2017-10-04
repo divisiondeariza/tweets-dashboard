@@ -5,6 +5,17 @@ from taggit.managers import TaggableManager
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
+class Rating(models.Model):
+	weight = models.FloatField(default = 1,
+								validators=[MaxValueValidator(1), MinValueValidator(0)])
+	name = models.CharField(max_length = 255)
+
+
+class RatingScore(models.Model):
+	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE, related_name="ratingScore")
+	group = models.ForeignKey('Rating', on_delete=models.CASCADE)
+	score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
+
 
 class Tweet(models.Model):
 	tweet_id = models.CharField(max_length = 255, unique =  True)
@@ -23,6 +34,7 @@ class Tweet(models.Model):
 	responses = models.IntegerField(null=True)
 	exists_in_twitter = models.BooleanField(default=True)
 	tags = TaggableManager()
+	ratings = models.ManyToManyField(Rating, through='RatingScore')
 
 	def url(self):
 		return '<a target="_blank" href="https://twitter.com/statuses/%s">link to tweet</a>' % (self.tweet_id)
@@ -33,16 +45,6 @@ class Tweet(models.Model):
 	def is_response(self):
 		return not self.in_reply_to_status_id == "";
 
-class RatingGroup(models.Model):
-	weight = models.FloatField(default = 1,
-								validators=[MaxValueValidator(1), MinValueValidator(0)])
-	name = models.CharField(max_length = 255)
-
-
-class Rating(models.Model):
-	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE)
-	group = models.ForeignKey('RatingGroup', on_delete=models.CASCADE)
-	score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
 	
 
 	

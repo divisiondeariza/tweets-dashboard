@@ -38,24 +38,24 @@ class TestTweets(TestCase):
 class TestRatingGroup(TestCase):
     
     def testWeightIsOneByDefault(self):
-        group = models.RatingGroup.objects.create(name = "a group")
+        group = models.Rating.objects.create(name = "a group")
         self.assertEqual(group.weight, 1)
      
     def testWeightcanotBeGreaterThanOne(self):
         with self.assertRaises(ValidationError):
-            group = models.RatingGroup.objects.create(name = "a group", weight = 1.1)
+            group = models.Rating.objects.create(name = "a group", weight = 1.1)
             group.full_clean()
  
     def testWeightcanotBeLessThanZero(self):
         with self.assertRaises(ValidationError):
-            group = models.RatingGroup.objects.create(name = "a group", weight = -0.1)
+            group = models.Rating.objects.create(name = "a group", weight = -0.1)
             group.full_clean()   
         
 class TestRating(TestCase):
 
     def setUp(self):
         self.tweet = models.Tweet.objects.create(tweet_id = "tweetid")
-        self.group = models.RatingGroup.objects.create(name = "a group")
+        self.group = models.Rating.objects.create(name = "a group")
 
 
     def tearDown(self):
@@ -63,14 +63,14 @@ class TestRating(TestCase):
 
     def testScoreCannotBeGreaterThan10(self):
         with self.assertRaises(ValidationError):
-            rating = models.Rating.objects.create(tweet = self.tweet,
+            rating = models.RatingScore.objects.create(tweet = self.tweet,
                                                   group = self.group,
                                                   score = 11)
             rating.full_clean()
         
     def testScoreCannotBeLessThanZero(self):
         with self.assertRaises(ValidationError):
-            rating = models.Rating.objects.create(tweet = self.tweet,
+            rating = models.RatingScore.objects.create(tweet = self.tweet,
                                                   group = self.group,
                                                   score = -1)
             rating.full_clean()          
