@@ -12,8 +12,8 @@ class Rating(models.Model):
 
 
 class RatingScore(models.Model):
-	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE, related_name="ratingScore")
-	group = models.ForeignKey('Rating', on_delete=models.CASCADE)
+	tweet = models.ForeignKey('Tweet', on_delete=models.CASCADE, related_name="rating_score")
+	group = models.ForeignKey('Rating', on_delete=models.CASCADE, related_name="rating_score")
 	score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(0)])
 
 
@@ -44,6 +44,18 @@ class Tweet(models.Model):
 
 	def is_response(self):
 		return not self.in_reply_to_status_id == "";
+	
+	def mean_rating(self):
+		sum_of_weights = 0
+		weighted_sum = 0
+		for rating in self.ratings.all():
+			sum_of_weights += rating.weight
+			weighted_sum += rating.weight*rating.rating_score.get(tweet = self).score
+		if sum_of_weights == 0:
+			return 0
+		return weighted_sum/sum_of_weights
+		
+			
 
 	
 

@@ -34,13 +34,14 @@ class inlineRatingAdmin(admin.TabularInline):
 @admin.register(models.Tweet)
 class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 	inlines = [inlineRatingAdmin]
-	list_display  = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 'in_reply_to_user_id')
+	list_display  = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter',
+					 'in_reply_to_user_id', 'mean_rating')
 	readonly_fields = ('text', 'likes', 'retweets', 'timestamp', 'url', 'exists_in_twitter', 
 					   'in_reply_to_user_id', 'tweet_id', 'in_reply_to_status_id',
  					   'retweeted_status_id', 'retweeted_status_user_id', 'retweeted_status_timestamp',
- 					   'source', 'expanded_urls', 'responses')
+ 					   'source', 'expanded_urls', 'responses', 'mean_rating')
 	list_filter = (('timestamp', DateRangeFilter), 'exists_in_twitter', IsResponseFilter, 'tags')
-	advanced_filter_fields = ('timestamp', 'exists_in_twitter', 'likes', 'retweets', 'is_response')
+	advanced_filter_fields = ('timestamp', 'exists_in_twitter', 'likes', 'retweets', 'is_response', 'mean_rating')
 	actions = ['destroy_tweets']
 	search_fields = ['text']
 	list_per_page = 990
@@ -52,7 +53,7 @@ class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 
 	def has_add_permission(self, request):
 		return False
-		 
+
 	def has_delete_permission(self, request, obj=None):
 		return False       
 
