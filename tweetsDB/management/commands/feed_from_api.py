@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
-from libs.twitter_utils import tweets_scrapper
-
+from libs.twitter_utils.tweets_scrapper import TweetsScrapper
 
 class Command(BaseCommand):
 	help = 'populates tweets in database with api tweets'
@@ -9,5 +8,5 @@ class Command(BaseCommand):
 		parser.add_argument('--update-all', action='store_true')
 		
 	def handle(self, *args, **options):
-		scrapper = tweets_scrapper.TweetsScrapper()
+		scrapper = TweetsScrapper()
 		scrapper.populate_db(only_not_scrapped = not options['update_all'])
