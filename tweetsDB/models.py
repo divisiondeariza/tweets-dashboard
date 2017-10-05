@@ -9,6 +9,10 @@ class Rating(models.Model):
 	weight = models.FloatField(default = 1,
 								validators=[MaxValueValidator(1), MinValueValidator(0)])
 	name = models.CharField(max_length = 255)
+	
+	def __unicode__(self):
+		return "{0} ({1})".format(self.name, self.weight)
+
 
 
 class RatingScore(models.Model):
@@ -18,7 +22,7 @@ class RatingScore(models.Model):
 
 
 class Tweet(models.Model):
-	tweet_id = models.CharField(max_length = 255, unique =  True)
+	tweet_id = models.TextField(max_length = 255, unique =  True)
 	in_reply_to_status_id = models.CharField(max_length = 255)
 	in_reply_to_user_id = models.CharField(max_length = 255)
 	timestamp = models.DateTimeField(null=True)
