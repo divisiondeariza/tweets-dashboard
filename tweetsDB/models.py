@@ -23,15 +23,15 @@ class RatingScore(models.Model):
 
 class Tweet(models.Model):
 	tweet_id = models.TextField(max_length = 255, unique =  True)
-	in_reply_to_status_id = models.CharField(max_length = 255)
-	in_reply_to_user_id = models.CharField(max_length = 255)
+	in_reply_to_status_id = models.CharField(max_length = 255, null=True, default ="")
+	in_reply_to_user_id = models.CharField(max_length = 255, null=True, default ="")
 	timestamp = models.DateTimeField(null=True)
-	source = models.CharField(max_length = 255)
-	text = models.CharField(max_length = 255)
-	retweeted_status_id = models.CharField(max_length = 255)	
-	retweeted_status_user_id = models.CharField(max_length = 255)
+	source = models.CharField(max_length = 255, null=True, default ="")
+	text = models.CharField(max_length = 255, null=True, default ="")
+	retweeted_status_id = models.CharField(max_length = 255, null=True, default ="")	
+	retweeted_status_user_id = models.CharField(max_length = 255, null=True, default ="")
 	retweeted_status_timestamp = models.DateTimeField(null=True)
-	expanded_urls = models.CharField(max_length = 255)
+	expanded_urls = models.CharField(max_length = 255, null=True, default ="")
 	
 	likes = models.IntegerField(null=True)
 	retweets = models.IntegerField(null=True) 

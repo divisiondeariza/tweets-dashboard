@@ -3,7 +3,6 @@ Created on 4/10/2017
 
 @author: emmanuel
 '''
-import unittest
 from django.test.testcases import TestCase
 from tweetsDB import models
 from django.core.exceptions import ValidationError
@@ -104,7 +103,3 @@ class TestRatingScore(TestCase):
                                                   group = self.group,
                                                   score = -1)
             rating.full_clean()          
-            
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
