@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rangefilter',
     'advanced_filters',
     'taggit',
+    'export_action',
     'tweetsDB'
 ]
 

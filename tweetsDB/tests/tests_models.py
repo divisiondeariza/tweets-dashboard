@@ -20,7 +20,6 @@ class TestTweets(TestCase):
     def tearDown(self):
         pass
 
-
     def testRendersUrlCorrectly(self):
         tweet = models.Tweet.objects.create(tweet_id = "tweetid")
         self.assertEqual(tweet.url(), 
@@ -63,19 +62,23 @@ class TestTweets(TestCase):
    
 class TestRating(TestCase):
     
+    def testUnicodeIsSetCorrectly(self):
+        rating = models.Rating.objects.create(name = "a rating" , weight = 0.5)
+        self.assertEqual(str(rating), "{0} ({1})".format(rating.name, rating.weight))
+    
     def testWeightIsOneByDefault(self):
-        group = models.Rating.objects.create(name = "a rating")
-        self.assertEqual(group.weight, 1)
+        rating = models.Rating.objects.create(name = "a rating")
+        self.assertEqual(rating.weight, 1)
      
     def testWeightcanotBeGreaterThanOne(self):
         with self.assertRaises(ValidationError):
-            group = models.Rating.objects.create(name = "a rating", weight = 1.1)
-            group.full_clean()
+            rating = models.Rating.objects.create(name = "a rating", weight = 1.1)
+            rating.full_clean()
  
     def testWeightcanotBeLessThanZero(self):
         with self.assertRaises(ValidationError):
-            group = models.Rating.objects.create(name = "a rating", weight = -0.1)
-            group.full_clean()   
+            rating = models.Rating.objects.create(name = "a rating", weight = -0.1)
+            rating.full_clean()   
             
         
 class TestRatingScore(TestCase):
