@@ -27,7 +27,7 @@ class TimelineSaver(object):
             tweet.timestamp = status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")
             tweet.source = status.source
             tweet.text = status.text
-            tweet.retweets = status.retweet_count
+            tweet.retweets_count = status.retweet_count
             tweet.likes_count = status.favorite_count                                                        
 
             if status.retweeted:

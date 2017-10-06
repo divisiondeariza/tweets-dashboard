@@ -88,8 +88,8 @@ class TestChunkSaver(TestCase):
         mock_logger.login = Mock(return_value = self.mock_API)
         chunkSaver = tweets_scrapper.ChunkSaver()
         chunkSaver.save(['id0','id1'])
-        self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id0', retweets = 0, likes_count = 1).exists())
-        self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id1', retweets = 2, likes_count = 3).exists())        
+        self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id0', retweets_count = 0, likes_count = 1).exists())
+        self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id1', retweets_count = 2, likes_count = 3).exists())        
         
     @patch(__name__ + '.tweets_scrapper.logger')
     def testCreatesOnlyOneAprPerInstance(self, mock_logger):

@@ -34,7 +34,7 @@ class Tweet(models.Model):
 	expanded_urls = models.CharField(max_length = 255, null=True, default ="")
 	
 	likes_count = models.IntegerField(null=True)
-	retweets = models.IntegerField(null=True) 
+	retweets_count = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
 	exists_in_twitter = models.BooleanField(default=True)
 	tags = TaggableManager()

@@ -68,7 +68,7 @@ class Test(TestCase):
                                                     timestamp = '2017-10-05 03:49:43+0000',
                                                     source =  'Twitter Web Client',
                                                     text = "text of tweet id1",
-                                                    retweets = 5,
+                                                    retweets_count = 5,
                                                     likes_count = 10,
                                                     retweeted_status_id = "",
                                                     retweeted_status_user_id = "",
@@ -80,7 +80,7 @@ class Test(TestCase):
                                                     timestamp = '2017-10-05 03:49:43+0000',
                                                     source =  'Twitter Web Client',
                                                     text = "text of tweet id2",
-                                                    retweets = 5,
+                                                    retweets_count = 5,
                                                     likes_count = 10,
                                                     retweeted_status_id = "id2R",
                                                     retweeted_status_user_id = "someauthorid",
@@ -95,7 +95,7 @@ class Test(TestCase):
         saver.save()
         self.response1.retweet_count = 10
         saver.save()
-        self.assertEqual(models.Tweet.objects.get(tweet_id = "id1").retweets, 10)
+        self.assertEqual(models.Tweet.objects.get(tweet_id = "id1").retweets_count, 10)
         
 
 
