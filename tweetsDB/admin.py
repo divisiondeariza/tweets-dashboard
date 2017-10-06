@@ -34,14 +34,14 @@ class inlineRatingAdmin(admin.TabularInline):
 @admin.register(models.Tweet)
 class TweetAdmin(AdminAdvancedFiltersMixin, admin.ModelAdmin):
 	inlines = [inlineRatingAdmin]
-	list_display  = ('text', 'likes_count', 'retweets_count', 'timestamp', 'url', 'exists_in_twitter',
+	list_display  = ('text', 'likes_count', 'retweets_count', 'created_at', 'url', 'exists_in_twitter',
 					 'in_reply_to_user_id', 'mean_rating')
-	readonly_fields = ('text', 'likes_count', 'retweets_count', 'timestamp', 'url', 'exists_in_twitter', 
+	readonly_fields = ('text', 'likes_count', 'retweets_count', 'created_at', 'url', 'exists_in_twitter', 
 					   'in_reply_to_user_id', 'tweet_id', 'in_reply_to_status_id',
  					   'retweeted_status_id', 'retweeted_status_user_id', 'retweeted_status_timestamp',
  					   'source', 'expanded_urls', 'responses', 'mean_rating')
-	list_filter = (('timestamp', DateRangeFilter), 'exists_in_twitter', IsResponseFilter, 'tags')
-	advanced_filter_fields = ('timestamp', 'exists_in_twitter', 'likes', 'retweets', 'is_response', 'mean_rating')
+	list_filter = (('created_at', DateRangeFilter), 'exists_in_twitter', IsResponseFilter, 'tags')
+	advanced_filter_fields = ('created_at', 'exists_in_twitter', 'likes_count', 'retweets_count', 'is_response', 'mean_rating')
 	actions = ['destroy_tweets']
 	search_fields = ['text']
 	list_per_page = 990

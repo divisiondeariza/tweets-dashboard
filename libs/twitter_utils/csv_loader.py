@@ -21,7 +21,7 @@ class Loader(object):
         tweet, tweetWasCreated = models.Tweet.objects.get_or_create(tweet_id=row['tweet_id'])
         tweet.in_reply_to_status_id = row['in_reply_to_status_id']
         tweet.in_reply_to_user_id = row['in_reply_to_user_id']
-        tweet.timestamp = row['timestamp'].replace(" +", "+")
+        tweet.created_at = row['timestamp'].replace(" +", "+")
         tweet.source = row['source']
         tweet.text = row['text']
         tweet.retweeted_status_id = row['retweeted_status_id']

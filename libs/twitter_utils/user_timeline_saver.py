@@ -24,7 +24,7 @@ class TimelineSaver(object):
             tweet, wasCreated = models.Tweet.objects.get_or_create(tweet_id = status.id)
             tweet.in_reply_to_status_id = status.in_reply_to_status_id
             tweet.in_reply_to_user_id = status.in_reply_to_user_id
-            tweet.timestamp = status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")
+            tweet.created_at = status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")
             tweet.source = status.source
             tweet.text = status.text
             tweet.retweets_count = status.retweet_count

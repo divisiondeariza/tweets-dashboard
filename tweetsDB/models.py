@@ -25,7 +25,7 @@ class Tweet(models.Model):
 	tweet_id = models.TextField(max_length = 255, unique =  True)
 	in_reply_to_status_id = models.CharField(max_length = 255, null=True, default ="")
 	in_reply_to_user_id = models.CharField(max_length = 255, null=True, default ="")
-	timestamp = models.DateTimeField(null=True)
+	created_at = models.DateTimeField(null=True)
 	source = models.CharField(max_length = 255, null=True, default ="")
 	text = models.CharField(max_length = 255, null=True, default ="")
 	retweeted_status_id = models.CharField(max_length = 255, null=True, default ="")	

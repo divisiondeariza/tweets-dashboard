@@ -17,7 +17,7 @@ class TweetsScrapper(object):
 
     def _get_query(self, only_not_scrapped):
         if only_not_scrapped:
-            query = models.Tweet.objects.filter(exists_in_twitter=True, likes=None)
+            query = models.Tweet.objects.filter(exists_in_twitter=True, likes_count=None)
         else:
             query = models.Tweet.objects.all()
         return query

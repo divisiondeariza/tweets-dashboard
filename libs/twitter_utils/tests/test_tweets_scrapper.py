@@ -24,7 +24,7 @@ class TestTweetsScrapper(unittest.TestCase):
         pass
         for i in range(200):
             tweet, tweetWasCreated = models.Tweet.objects.get_or_create(tweet_id = "dummyid{0}".format(i),
-                                                                        timestamp = "2017-09-25 13:41:10+0000")
+                                                                        created_at = "2017-09-25 13:41:10+0000")
 
 
     def tearDown(self):
@@ -56,7 +56,7 @@ class TestTweetsScrapper(unittest.TestCase):
         scrapper.populate_db()
         for i in range(100):
             tweet, tweetWasCreated = models.Tweet.objects.get_or_create(tweet_id = "dummyid{0}".format(i+200),
-                                                                        timestamp = "2017-09-25 13:41:10+0000")
+                                                                        created_at = "2017-09-25 13:41:10+0000")
         mock_API.statuses_lookup.reset_mock() 
         scrapper.populate_db(only_not_scrapped = True)
         mock_API.statuses_lookup.assert_called_once_with([u"dummyid{0}".format(i + 200) for i in range(100) ])
@@ -67,7 +67,7 @@ class TestChunkSaver(TestCase):
     def setUp(self):
         for i in range(4):
             tweet = models.Tweet.objects.create(tweet_id = "id{0}".format(i),
-                                                timestamp = "2017-09-25 13:41:10+0000")
+                                                created_at = "2017-09-25 13:41:10+0000")
             
         self.mock_API = Mock()
         self.mock_API.statuses_lookup = Mock(return_value = [Status_mock('id0', 0, 1),

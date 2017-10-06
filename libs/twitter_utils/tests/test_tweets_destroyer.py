@@ -19,7 +19,7 @@ class Test(TestCase):
         self.mock_API = Mock()
         for i in range(5):
             models.Tweet.objects.create(tweet_id = "id{0}".format(i),
-                                        timestamp = "2017-09-25 13:41:10+0000")
+                                        created_at = "2017-09-25 13:41:10+0000")
 
 
     def tearDown(self):
