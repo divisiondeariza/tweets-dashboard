@@ -33,7 +33,7 @@ class Tweet(models.Model):
 	retweeted_status_timestamp = models.DateTimeField(null=True)
 	expanded_urls = models.CharField(max_length = 255, null=True, default ="")
 	
-	likes = models.IntegerField(null=True)
+	likes_count = models.IntegerField(null=True)
 	retweets = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
 	exists_in_twitter = models.BooleanField(default=True)

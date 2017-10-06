@@ -69,7 +69,7 @@ class Test(TestCase):
                                                     source =  'Twitter Web Client',
                                                     text = "text of tweet id1",
                                                     retweets = 5,
-                                                    likes = 10,
+                                                    likes_count = 10,
                                                     retweeted_status_id = "",
                                                     retweeted_status_user_id = "",
                                                     retweeted_status_timestamp = None).exists())
@@ -81,7 +81,7 @@ class Test(TestCase):
                                                     source =  'Twitter Web Client',
                                                     text = "text of tweet id2",
                                                     retweets = 5,
-                                                    likes = 10,
+                                                    likes_count = 10,
                                                     retweeted_status_id = "id2R",
                                                     retweeted_status_user_id = "someauthorid",
                                                     retweeted_status_timestamp = '2017-10-05 03:49:43+0000',

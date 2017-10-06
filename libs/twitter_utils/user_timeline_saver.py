@@ -28,7 +28,7 @@ class TimelineSaver(object):
             tweet.source = status.source
             tweet.text = status.text
             tweet.retweets = status.retweet_count
-            tweet.likes = status.favorite_count                                                        
+            tweet.likes_count = status.favorite_count                                                        
 
             if status.retweeted:
                 tweet.retweeted_status_id = status.retweeted_status.id

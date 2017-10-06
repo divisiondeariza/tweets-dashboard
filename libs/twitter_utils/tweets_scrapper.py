@@ -48,7 +48,7 @@ class ChunkSaver(object):
     def _save_single_tweet(self, status):
         tweet = models.Tweet.objects.get(tweet_id=status.id)
         tweet.retweets = status.retweet_count
-        tweet.likes = status.favorite_count
+        tweet.likes_count = status.favorite_count
         tweet.save()
 
     def _mark_id_as_non_existent(self, tweet_id):
