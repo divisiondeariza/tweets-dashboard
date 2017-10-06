@@ -33,7 +33,7 @@ class TimelineSaver(object):
             if status.retweeted:
                 tweet.retweeted_status_id = status.retweeted_status.id
                 tweet.retweeted_status_user_id = status.retweeted_status.author.id
-                tweet.retweeted_status_timestamp = status.retweeted_status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")
+                tweet.retweeted_status_created_at = status.retweeted_status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")
             tweet.save()
              
                                                                     

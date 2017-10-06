@@ -51,7 +51,7 @@ class Test(TestCase):
                                                     text = 'this is a tweet',
                                                     retweeted_status_id = 'xx',
                                                     retweeted_status_user_id = 'xx',    
-                                                    retweeted_status_timestamp = '2017-09-25 13:33:07+0000',
+                                                    retweeted_status_created_at = '2017-09-25 13:33:07+0000',
                                                     expanded_urls = '').exists())
 
         self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id1', 
@@ -62,7 +62,7 @@ class Test(TestCase):
                                                     text = 'this is another tweet',
                                                     retweeted_status_id = '',
                                                     retweeted_status_user_id = '',    
-                                                    retweeted_status_timestamp = None,
+                                                    retweeted_status_created_at = None,
                                                     expanded_urls = 'https://twitter.com/DivisionDeAriza/status/912306991871250440/photo/1'
                                                     ).exists())        
 

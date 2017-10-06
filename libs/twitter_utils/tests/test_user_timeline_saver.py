@@ -72,7 +72,7 @@ class Test(TestCase):
                                                     likes_count = 10,
                                                     retweeted_status_id = "",
                                                     retweeted_status_user_id = "",
-                                                    retweeted_status_timestamp = None).exists())
+                                                    retweeted_status_created_at = None).exists())
         
         self.assertTrue(models.Tweet.objects.filter(tweet_id = 'id2',
                                                     in_reply_to_status_id = 'someid',
@@ -84,7 +84,7 @@ class Test(TestCase):
                                                     likes_count = 10,
                                                     retweeted_status_id = "id2R",
                                                     retweeted_status_user_id = "someauthorid",
-                                                    retweeted_status_timestamp = '2017-10-05 03:49:43+0000',
+                                                    retweeted_status_created_at = '2017-10-05 03:49:43+0000',
                                                     ).exists())    
     @patch(__name__ + '.user_timeline_saver.tweepy')    
     @patch(__name__ + '.user_timeline_saver.logger')    

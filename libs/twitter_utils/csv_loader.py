@@ -27,7 +27,7 @@ class Loader(object):
         tweet.retweeted_status_id = row['retweeted_status_id']
         tweet.retweeted_status_user_id = row['retweeted_status_user_id']
         if (row['retweeted_status_timestamp']):
-            tweet.retweeted_status_timestamp = row['retweeted_status_timestamp'].replace(" +", "+")
+            tweet.retweeted_status_created_at = row['retweeted_status_timestamp'].replace(" +", "+")
         tweet.expanded_urls = row['expanded_urls']
         tweet.save()
 

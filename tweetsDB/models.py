@@ -30,7 +30,7 @@ class Tweet(models.Model):
 	text = models.CharField(max_length = 255, null=True, default ="")
 	retweeted_status_id = models.CharField(max_length = 255, null=True, default ="")	
 	retweeted_status_user_id = models.CharField(max_length = 255, null=True, default ="")
-	retweeted_status_timestamp = models.DateTimeField(null=True)
+	retweeted_status_created_at = models.DateTimeField(null=True)
 	expanded_urls = models.CharField(max_length = 255, null=True, default ="")
 	
 	likes_count = models.IntegerField(null=True)
