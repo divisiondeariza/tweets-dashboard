@@ -12,3 +12,5 @@ install:
 # command to run tests
 script:
   - python manage.py test
+  - coverage run --source='.' --omit='env/*,*/tests*' manage.py test
+after_success: coveralls
