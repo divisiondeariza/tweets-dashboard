@@ -1,5 +1,5 @@
 # tweets-dashboard
-
+[![Build Status](https://travis-ci.org/divisiondeariza/tweets-dashboard.svg?branch=master)](https://travis-ci.org/divisiondeariza/tweets-dashboard)
 [![Coverage Status](https://coveralls.io/repos/github/divisiondeariza/tweets-dashboard/badge.svg?branch=master)](https://coveralls.io/github/divisiondeariza/tweets-dashboard?branch=master)
 
 Django-based Dashboard for analyzing, filtering and erasing tweets stored from api or from csv file.
@@ -89,19 +89,32 @@ There are some basic ways of filtering tweets:
  - By tags (using the tagging system)
  - By key words in tweets itselves
  
+ ![Image of filter](https://raw.githubusercontent.com/divisiondeariza/tweets-dashboard/master/docs/filter.png)
+ 
 #### Advanced Filter
-It also has a system for filtering tweets in a query-styled way, which can also be combined with the other filters
+It also has a system for filtering tweets in a query-styled way, which can also be combined with the other filters.
 
-### Delete tweets
-You can bulk delete selected tweets directly from dashboard, they will be erased from twitter but remain in databased and are marked as non existent.
+![Image of advanced filter](https://raw.githubusercontent.com/divisiondeariza/tweets-dashboard/master/docs/advanced_filter.png)
 
 ### Tag tweets
-It may be useful to tag some tweets (say, in those you talk about politics set tag 'politics'), and use them as filters latter
+It may be useful to tag some tweets (say, in those you talk about politics set tag 'politics'), and use them as filters latter.
+
+![Image of tags](https://raw.githubusercontent.com/divisiondeariza/tweets-dashboard/master/docs/tags.png)
 
 ### Score tweets
 You can add custom scores (ratings) for different metrics to every tweet and assing a weight to each rating, and then sort them in the dashboard by the weigthed-mean of them.
 
-### CSV export
+![Image of rating](https://raw.githubusercontent.com/divisiondeariza/tweets-dashboard/master/docs/rating.png)
+
+### Bulk actions
+There are some actions you can do over severat tweets at the same time.
+
+![Image of bulk actions](https://raw.githubusercontent.com/divisiondeariza/tweets-dashboard/master/docs/bulk_actions.png)
+
+#### Delete tweets
+You can bulk delete selected tweets directly from dashboard, they will be erased from twitter but remain in databased and are marked as non existent.
+
+#### CSV export
 You can select some tweets and export them in a csv file.
 
 
