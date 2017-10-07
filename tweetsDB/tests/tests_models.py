@@ -19,6 +19,16 @@ class TestTweets(TestCase):
     def tearDown(self):
         pass
 
+    def testUnicodeIsSetCorrectly(self):
+        tweet = models.Tweet.objects.create(tweet_id = "tweetid",
+                                            text = "this is a tweet text")
+        self.assertEqual(str(tweet), tweet.text)
+  
+    def testUnicodeIsSetCorrectlyWhenTweetSiOver50Chars(self):
+        tweet = models.Tweet.objects.create(tweet_id = "tweetid",
+                                            text = "RT @Somebody this is a pretty damn long tweet and will be truncated for the first 50 characters.")
+        self.assertEqual(str(tweet), 'RT @Somebody this is a pretty damn long tweet and ...')
+                
     def testRendersUrlCorrectly(self):
         tweet = models.Tweet.objects.create(tweet_id = "tweetid")
         self.assertEqual(tweet.url(), 

@@ -58,7 +58,11 @@ class Tweet(models.Model):
 		if sum_of_weights == 0:
 			return 0
 		return weighted_sum/sum_of_weights
-		
+
+	def __unicode__(self):
+		if len(self.text)>50:
+			return self.text[0:50] + "..."
+		return self.text
 			
 
 	
