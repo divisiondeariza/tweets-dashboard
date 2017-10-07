@@ -37,7 +37,7 @@ class Tweet(models.Model):
 	retweets_count = models.IntegerField(null=True) 
 	responses = models.IntegerField(null=True)
 	exists_in_twitter = models.BooleanField(default=True)
-	tags = TaggableManager()
+	tags = TaggableManager(blank=True)
 	ratings = models.ManyToManyField(Rating, through='RatingScore')
 
 	def url(self):
