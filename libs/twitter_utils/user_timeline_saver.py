@@ -30,7 +30,7 @@ class TimelineSaver(object):
             tweet.retweets_count = status.retweet_count
             tweet.likes_count = status.favorite_count                                                        
 
-            if status.retweeted:
+            if hasattr(status, 'retweeted_status'):
                 tweet.retweeted_status_id = status.retweeted_status.id
                 tweet.retweeted_status_user_id = status.retweeted_status.author.id
                 tweet.retweeted_status_created_at = status.retweeted_status.created_at.strftime("%Y-%m-%d %H:%M:%S+0000")

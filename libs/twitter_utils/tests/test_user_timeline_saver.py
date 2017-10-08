@@ -25,7 +25,6 @@ class MockStatus():
         self.text = "text of tweet {0}".format(tweet_id)
         self.retweet_count = 5
         self.favorite_count = 10
-        self.retweeted = is_retweet
         self.author = MockAuthor()
         if is_retweet:
             self.retweeted_status = MockStatus(self.id + "R")
@@ -37,7 +36,6 @@ class Test(TestCase):
 
     def setUp(self):
         self.mock_API = Mock()
-        #self.mock_API.user_timeline.side_effect = [response1,response2,[]]
         self.response1 = MockStatus('id1')
         self.response2 = MockStatus('id2', True)
 
