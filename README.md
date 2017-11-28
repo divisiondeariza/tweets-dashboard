@@ -62,7 +62,7 @@ And it will be update yout database automatically. This way have two inconvinien
 You can populate the database by parsing the csv file in your twitter archive (you can request it from [here](https://twitter.com/settings/account)).
 
 ```bash
-python manage.py populate_from_file path/to/your/archive.csv
+python manage.py populate --from-file path/to/your/archive.csv
 ```
 
 The csv from archive contains some information about all your tweets (and retweets) omits some quite interesting information like how many retweets and favourites has each tweet. You can feed the database already loaded with archive running this command:
