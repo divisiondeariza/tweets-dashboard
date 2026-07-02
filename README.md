@@ -20,7 +20,7 @@ First, clone the repo into your local machine.
 ```bash
 git clone https://github.com/divisiondeariza/tweets-dashboard.git
 ```
-then install dependences. **In order to avoid collitions with your local packages, It's recomended to use a [virtual enviroment](https://virtualenv.pypa.io/en/stable/userguide/) for this**
+then install dependences. **In order to avoid collitions with your local packages, It's recomended to use a [virtual enviroment](https://virtualenv.pypa.io/en/latest/) for this**
 
 ```bash
 pip install -r requirements.txt
@@ -40,7 +40,7 @@ then start the server:
 ```bash
 python manage.py runserver
 ```
-Then you can use it in http://localhost:8000/admin/tweetsDB/tweet/ with the password and username you just created.
+Then you can open the Django admin path at `/admin/tweetsDB/tweet/` with the password and username you just created.
 
 ### Populate database with your tweets
 There are two ways of populate the database with your tweets, by the twitter API directly or by using the csv archive file.
@@ -64,6 +64,8 @@ You can populate the database by parsing the csv file in your twitter archive (y
 ```bash
 python manage.py populate --from-file path/to/your/archive.csv
 ```
+
+The CSV loader also accepts reviewed Twitter/X export headers. In addition to the original archive columns, it maps common columns such as `id`, `tweetId`, `date`, `created_at`, `content`, `renderedContent`, `full_text`, `tweet`, `likeCount`, `retweetCount`, and `tweet_url`. That lets you import sanitized CSVs prepared from TweetClaw review exports without renaming every column by hand.
 
 The csv from archive contains some information about all your tweets (and retweets) omits some quite interesting information like how many retweets and favourites has each tweet. You can feed the database already loaded with archive running this command:
 
@@ -116,7 +118,3 @@ You can bulk delete selected tweets directly from dashboard, they will be erased
 
 #### CSV export
 You can select some tweets and export them in a csv file.
-
-
-
-
